@@ -5,7 +5,11 @@ CREATE DATABASE educatech_manha;
 USE educatech_manha;
 
 // Criação da tabela Alunos
-CREATE TABLE alunos IF NOT EXISTS (
+-- Armazenar nome completo, e-mail, data de nascimento, telefone e
+-- data de cadastro. Cada aluno deve possuir ID único. O e-mail deve ser
+-- único. Nome e e-mail são obrigatórios.
+
+CREATE TABLE IF NOT EXISTS alunos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
@@ -18,6 +22,10 @@ CREATE TABLE alunos IF NOT EXISTS (
 ALTER TABLE alunos MODIFY COLUMN telefone CHAR(14);
 
 // Criação da tabela Professores
+-- Armazenar nome, e-mail, telefone e especialidade. Cada professor
+-- deve possuir ID único. O e-mail deve ser único. Nome e e-mail são
+-- obrigatórios.
+
 CREATE TABLE IF NOT EXISTS professores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -28,7 +36,12 @@ CREATE TABLE IF NOT EXISTS professores (
 
 
 // Criação da tabela Cursos
-CREATE TABLE cursos IF NOT EXISTS (
+-- Armazenar nome, descrição, carga horária, valor, professor
+-- responsável e data de criação. Todo curso deve possuir um professor
+-- responsável. O valor não pode ser negativo e a carga horária deve ser
+-- maior que zero.
+
+CREATE TABLE IF NOT EXISTS cursos  (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255),
     descricao TEXT,
@@ -39,7 +52,12 @@ CREATE TABLE cursos IF NOT EXISTS (
 );
 
 // Criação da tabela Matriculas
-CREATE TABLE matriculas IF NOT EXISTS (
+-- Armazenar aluno, curso, data da matrícula, nota final e situação. Um
+-- aluno não pode se matricular duas vezes no mesmo curso. A nota deve
+-- estar entre 0 e 10. Situações permitidas: EM_ANDAMENTO, CONCLUIDA
+-- ou CANCELADA.
+
+CREATE TABLE IF NOT EXISTS matriculas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     aluno_id INT NOT NULL,
     curso_id INT NOT NULL,
